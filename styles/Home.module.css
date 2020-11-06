@@ -33,6 +33,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #0070f3;
 }
 
 .title a {
@@ -49,7 +50,7 @@
 .title {
   margin: 0;
   line-height: 1.15;
-  font-size: 4rem;
+  font-size: 3rem;
 }
 
 .title,
@@ -59,7 +60,8 @@
 
 .description {
   line-height: 1.5;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  text-align: left;
 }
 
 .code {
@@ -76,13 +78,13 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 80%;
   margin-top: 3rem;
 }
 
 .card {
-  margin: 1rem;
-  flex-basis: 45%;
+  margin: 1%;
+  flex-basis: 30%;
   padding: 1.5rem;
   text-align: left;
   color: inherit;
@@ -101,13 +103,23 @@
 
 .card h3 {
   margin: 0 0 1rem 0;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
 }
 
 .card p {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   line-height: 1.5;
+  background: #0000000F;
+  width: fit-content;
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+.card .completed{
+  background: #00a3071f;
+}
+.card .completed:has(.card){
+  border-color: #00a307;
 }
 
 .logo {

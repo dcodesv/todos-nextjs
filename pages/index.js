@@ -1,7 +1,23 @@
+import {useState, useEffect} from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+
+  const URL_FETCH = 'https://jsonplaceholder.typicode.com/todos?_end=10'
+  const [todo, setTodo] = useState([])
+  
+  const getTodos = async (url) =>{
+    const datos = await fetch(url)
+    const todos = await datos.json()
+    setTodo(todos)
+  }
+
+  useEffect(() => {
+    getTodos(URL_FETCH)
+  }, [])
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -11,7 +27,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Testing API <a href="https://nextjs.org">NextJS</a>
         </h1>
 
         <p className={styles.description}>
@@ -20,44 +36,25 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+          {
+            todo.map(todos => (
+              <div className={styles.card}>
+                <h3>{todos.title}</h3>
+                <p className={todos.completed ? styles.completed : ''}>{todos.completed ? 'Completada' : 'En proceso'}</p>
+              </div>
+            ))
+            
+          }
         </div>
       </main>
 
       <footer className={styles.footer}>
         <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          href="https://dcodesv.dev"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+          Powered by dcodesv
         </a>
       </footer>
     </div>
