@@ -33,11 +33,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #0070f3;
+  color: #0000BB;
 }
 
 .title a {
-  color: #0070f3;
+  color: #0000BB;
   text-decoration: none;
 }
 
@@ -97,8 +97,8 @@
 .card:hover,
 .card:focus,
 .card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+  color: #0000BB;
+  border-color: #0000BB;
 }
 
 .card h3 {
@@ -114,12 +114,10 @@
   width: fit-content;
   padding: 2px 10px;
   border-radius: 20px;
+  color: #000;
 }
 .card .completed{
-  background: #00a3071f;
-}
-.card .completed:has(.card){
-  border-color: #00a307;
+  background: #5588FF4F;
 }
 
 .logo {

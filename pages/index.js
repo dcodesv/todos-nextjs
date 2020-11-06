@@ -4,13 +4,15 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
 
-  const URL_FETCH = 'https://jsonplaceholder.typicode.com/todos?_end=10'
+  const URL_FETCH = 'https://jsonplaceholder.typicode.com/todos?_end=15'
   const [todo, setTodo] = useState([])
+  const [loading, setLoading] = useState(true)
   
   const getTodos = async (url) =>{
     const datos = await fetch(url)
     const todos = await datos.json()
     setTodo(todos)
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -31,13 +33,13 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
+          Primeros pasos con Next JS
+          <code className={styles.code}>/dcodesv</code>
         </p>
 
         <div className={styles.grid}>
           {
-            todo.map(todos => (
+            loading ? <h3>Loading...</h3> :todo.map(todos => (
               <div className={styles.card}>
                 <h3>{todos.title}</h3>
                 <p className={todos.completed ? styles.completed : ''}>{todos.completed ? 'Completada' : 'En proceso'}</p>
