@@ -1,25 +1,44 @@
 import {useState, useEffect} from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import loadCustomRoutes from 'next/dist/lib/load-custom-routes';
+
+//Componentes
+import Skeleton from './components/skeleton'
+import skeleton from './components/skeleton';
 
 export default function Home() {
-
-  const URL_FETCH = 'https://jsonplaceholder.typicode.com/todos?_end=15'
+  let starPage = 0; 
+  var endPage = 10;
+  const [page, setPage] = useState(10)
+  var URL_FETCH = `https://jsonplaceholder.typicode.com/todos?_end=${page}`
+  
   const [todo, setTodo] = useState([])
   const [loading, setLoading] = useState(true)
+  const [loadingMore, setLoadingMore] = useState(false)
+  //Paginación
   
-  const getTodos = async (url) =>{
-    const datos = await fetch(url)
-    const todos = await datos.json()
-    setTodo(todos)
-    setLoading(false)
-  }
+    const getTodos = async (url) =>{
+      const datos = await fetch(url)
+      const todos = await datos.json()
+      setTodo(todos)
+      setLoading(false)
+    }
 
   useEffect(() => {
-    getTodos(URL_FETCH)
-  }, [])
+    setTimeout( () => {
+      getTodos(URL_FETCH)
+      loadMore(URL_FETCH)
+    }, 800)
+    
+  }, [page])
 
-
+  const loadMore = async (url) =>{
+      const datos = await fetch(url)
+      const todos = await datos.json()
+      setTodo(todos)
+      setLoadingMore(false)
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -39,14 +58,22 @@ export default function Home() {
 
         <div className={styles.grid}>
           {
-            loading ? <h3>Loading...</h3> :todo.map(todos => (
+            loading ? <Skeleton/> : todo.map(todos => (
+              
               <div className={styles.card}>
                 <h3>{todos.title}</h3>
                 <p className={todos.completed ? styles.completed : ''}>{todos.completed ? 'Completada' : 'En proceso'}</p>
               </div>
-            ))
-            
+            )) 
           }
+          {
+          loadingMore ? <Skeleton/> : console.log("Load More..")
+          }
+        </div>
+
+        <div>
+          <p>Mostrando {todo.length} resultados...</p>
+          <button onClick={() => setPage(page + 10) & setLoadingMore(true)} className={styles.botton}>Cargar mas tareas...</button>
         </div>
       </main>
 
