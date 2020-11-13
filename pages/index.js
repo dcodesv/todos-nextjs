@@ -26,10 +26,9 @@ export default function Home() {
     }
 
   useEffect(() => {
-    setTimeout( () => {
+    
       getTodos(URL_FETCH)
       loadMore(URL_FETCH)
-    }, 300)
     
   }, [page])
 
