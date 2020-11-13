@@ -9,8 +9,8 @@ import skeleton from './components/skeleton';
 
 export default function Home() {
   let starPage = 0; 
-  var endPage = 10;
-  const [page, setPage] = useState(10)
+  var endPage = 9;
+  const [page, setPage] = useState(9)
   var URL_FETCH = `https://jsonplaceholder.typicode.com/todos?_end=${page}`
   
   const [todo, setTodo] = useState([])
@@ -29,7 +29,7 @@ export default function Home() {
     setTimeout( () => {
       getTodos(URL_FETCH)
       loadMore(URL_FETCH)
-    }, 800)
+    }, 300)
     
   }, [page])
 
@@ -39,6 +39,7 @@ export default function Home() {
       setTodo(todos)
       setLoadingMore(false)
   }
+  var animate = loadingMore ? ' animate-pulse' : ''
   return (
     <div className={styles.container}>
       <Head>
@@ -72,8 +73,10 @@ export default function Home() {
         </div>
 
         <div>
-          <p>Mostrando {todo.length} resultados...</p>
-          <button onClick={() => setPage(page + 10) & setLoadingMore(true)} className={styles.botton}>Cargar mas tareas...</button>
+          <p className="text-center mt-10 p-4 text-gray-600">Mostrando {todo.length} resultados</p>
+          <button onClick={() => setPage(page + 9) & setLoadingMore(true)} className={styles.botton + " w-64 flex items-center justify-center"}>
+            {loadingMore ? <span className="flex items-center justify-center"><div className={styles.loader + " ease-linear rounded-full border-4 border-t-4 border-gray-200 h-6 w-6 mr-2"}></div> Cargando...</span> : 'Cargar más'}
+          </button>
         </div>
       </main>
 
