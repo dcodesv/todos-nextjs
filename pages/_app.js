@@ -1,7 +1,10 @@
-import { AppProps } from 'next/app'
 import '../styles/globals.css'
+// pages/_app.js
+export function reportWebVitals(metric) {
+  console.log(metric)
+}
 
-const MyApp = ({ Component, pageProps }) => {
+function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
 }
 
